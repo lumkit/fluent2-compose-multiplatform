@@ -1,2 +1,8 @@
-# fluent2-compose-multiplatform
- 一个适用于Compose Multplatform的Fluent2组件库
+<img src="static/ic-convert.svg" style="width: 100%; max-width: 700px;" alt="description"/>
+
+[![License](https://img.shields.io/github/license/Konyaco/compose-fluent-ui)](LICENSE)
+
+一个基于**Compose Multiplatform（M3）**开发的**Fluent2**组件库
+
+## 当前进度
+> 核心组件仍在开发中，敬请期待
