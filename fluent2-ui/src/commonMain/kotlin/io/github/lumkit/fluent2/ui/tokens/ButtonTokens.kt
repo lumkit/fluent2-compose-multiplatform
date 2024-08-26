@@ -48,8 +48,8 @@ internal object ButtonTokens {
     val ContentLargeSpacing = SpacingTokens.L
 
 
-    val MinWidth = 64.dp
-    val MinHeight = 32.dp
+    val MinWidth = 37.dp
+    val MinHeight = 24.dp
 
     val Stroke: BorderStroke
         @Composable

@@ -3,13 +3,18 @@ package io.github.lumkit.fluent2
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import fluent2_compose_multiplatform.simple.generated.resources.Res
+import fluent2_compose_multiplatform.simple.generated.resources.compose_multiplatform
 import io.github.lumkit.fluent2.ui.*
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -24,7 +29,7 @@ fun App() {
             color = FluentTheme.colorScheme.background
         ) {
             Column(
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Button(onClick = { isDark = !isDark }) {
@@ -36,7 +41,7 @@ fun App() {
 
                     }
                 ) {
-                    Text(text = "Fluent Design 2")
+                    Text(text = "Primary Button")
                 }
 
                 DefaultButton(
@@ -44,7 +49,7 @@ fun App() {
 
                     }
                 ) {
-                    Text(text = "Fluent Design 2")
+                    Text(text = "Default Button")
                 }
 
                 OutlineButton(
@@ -52,7 +57,7 @@ fun App() {
 
                     }
                 ) {
-                    Text(text = "Fluent Design 2")
+                    Text(text = "Outline Button")
                 }
 
                 SubtleButton(
@@ -60,7 +65,13 @@ fun App() {
 
                     }
                 ) {
-                    Text(text = "Fluent Design 2")
+                    Icon(
+                        painter = painterResource(Res.drawable.compose_multiplatform),
+                        contentDescription = null,
+                        tint = LocalIconColor.current,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Text(text = "Subtle Button")
                 }
 
                 TransparentButton(
@@ -68,7 +79,7 @@ fun App() {
 
                     }
                 ) {
-                    Text(text = "Fluent Design 2")
+                    Text(text = "Transparent Button")
                 }
             }
         }
