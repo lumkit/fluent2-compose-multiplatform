@@ -9,5 +9,5 @@ internal object ShapeTokens {
     val CornerMedium = RoundedCornerShape(4.dp)
     val CornerLarge = RoundedCornerShape(8.dp)
     val CornerXLarge = RoundedCornerShape(12.dp)
-    val CornerCircle = RoundedCornerShape(10000.dp)
+    val CornerCircle = RoundedCornerShape(50)
 }
