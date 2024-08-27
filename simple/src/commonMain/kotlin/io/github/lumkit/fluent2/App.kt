@@ -1,21 +1,25 @@
 package io.github.lumkit.fluent2
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
 import fluent2_compose_multiplatform.simple.generated.resources.Res
 import fluent2_compose_multiplatform.simple.generated.resources.compose_multiplatform
+import fluent2_compose_multiplatform.simple.generated.resources.ic_chevron_right
 import io.github.lumkit.fluent2.ui.*
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import kotlin.random.Random
 
 @Composable
 @Preview
@@ -29,59 +33,81 @@ fun App() {
             color = FluentTheme.colorScheme.background
         ) {
             Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.verticalScroll(rememberScrollState())
+                    .padding(28.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Button(onClick = { isDark = !isDark }) {
                     Text(if (isDark) "Dark" else "Light")
                 }
 
-                Button(
+                var expanded by remember { mutableStateOf(true) }
+                Accordion(
+                    modifier = Modifier.fillMaxWidth(),
                     onClick = {
-
+                        expanded = !expanded
+                    },
+                    expanded = expanded,
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(Res.drawable.ic_chevron_right),
+                            contentDescription = null,
+                            modifier = Modifier.rotate(it)
+                        )
+                    },
+                    text = {
+                        Text("Accordion")
                     }
                 ) {
-                    Text(text = "Primary Button")
+                    AccordionTest()
+                    AccordionTest()
+                    AccordionTest()
+                    AccordionTest()
                 }
 
-                DefaultButton(
+                Card(
+                    modifier = Modifier.size(100.dp, 36.dp),
                     onClick = {
 
                     }
                 ) {
-                    Text(text = "Default Button")
-                }
-
-                OutlineButton(
-                    onClick = {
-
-                    }
-                ) {
-                    Text(text = "Outline Button")
-                }
-
-                SubtleButton(
-                    onClick = {
-
-                    }
-                ) {
-                    Icon(
-                        painter = painterResource(Res.drawable.compose_multiplatform),
-                        contentDescription = null,
-                        tint = LocalIconColor.current,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    Text(text = "Subtle Button")
-                }
-
-                TransparentButton(
-                    onClick = {
-
-                    }
-                ) {
-                    Text(text = "Transparent Button")
+                    Text("Card")
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun AccordionTest(hasChildren: Boolean = true) {
+    var expand by rememberSaveable { mutableStateOf(false) }
+
+    Accordion(
+        modifier = Modifier.fillMaxWidth(),
+        onClick = {
+            expand = !expand
+        },
+        expanded = expand,
+        leadingIcon = {
+            Icon(
+                painter = if (hasChildren) painterResource(Res.drawable.ic_chevron_right) else painterResource(Res.drawable.compose_multiplatform),
+                contentDescription = null,
+                modifier = Modifier.rotate(it)
+            )
+        },
+        text = {
+            Text("Accordion")
+        },
+        trailingIcon = {
+            Icon(
+                painter = if (hasChildren) painterResource(Res.drawable.ic_chevron_right) else painterResource(Res.drawable.compose_multiplatform),
+                contentDescription = null,
+                modifier = Modifier.rotate(it)
+            )
+        }
+    ) {
+        if (hasChildren) {
+            AccordionTest(Random.nextBoolean())
         }
     }
 }
